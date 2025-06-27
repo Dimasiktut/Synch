@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sync Watch - Music & Movies Together</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎵 Sync Watch 🎬</h1>
+            <p>Listen to music and watch movies together in real-time</p>
+        </header>
+
+        <div class="auth-section" id="authSection">
+            <div class="auth-form">
+                <input type="text" id="usernameInput" placeholder="Enter your username" maxlength="20">
+                <button id="joinBtn">Join</button>
+            </div>
+        </div>
+
+        <div class="main-app" id="mainApp" style="display: none;">
+            <div class="room-controls">
+                <input type="text" id="roomIdInput" placeholder="Room ID (optional)">
+                <button id="createRoomBtn">Create Room</button>
+                <button id="joinRoomBtn">Join Room</button>
+            </div>
+
+            <div class="room-info" id="roomInfo" style="display: none;">
+                <h3>Room: <span id="currentRoomId"></span></h3>
+                <p>Users online: <span id="userCount">0</span></p>
+                <button id="leaveRoomBtn">Leave Room</button>
+            </div>
+
+            <div class="media-section" id="mediaSection" style="display: none;">
+                <div class="media-controls">
+                    <button id="uploadBtn">Upload Media</button>
+                    <input type="file" id="fileInput" accept="audio/*,video/*" style="display: none;">
+                    <button id="playPauseBtn" disabled>Play</button>
+                    <button id="syncBtn" disabled>Sync</button>
+                </div>
+
+                <div class="media-player">
+                    <video id="mediaPlayer" controls style="display: none; width: 100%; max-width: 800px;"></video>
+                    <audio id="audioPlayer" controls style="display: none; width: 100%;"></audio>
+                </div>
+
+                <div class="playback-info">
+                    <div class="progress-bar">
+                        <div class="progress" id="progressBar"></div>
+                    </div>
+                    <div class="time-info">
+                        <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="voice-chat" id="voiceChat" style="display: none;">
+                <div class="voice-controls">
+                    <button id="micToggle">🎤 Mic Off</button>
+                    <button id="speakerToggle">🔊 Speaker On</button>
+                </div>
+                <div class="voice-users" id="voiceUsers">
+                    <!-- Voice chat participants will be listed here -->
+                </div>
+            </div>
+
+            <div class="chat-section">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Chat messages will appear here -->
+                </div>
+                <div class="chat-input">
+                    <input type="text" id="messageInput" placeholder="Type a message..." maxlength="200">
+                    <button id="sendBtn">Send</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
