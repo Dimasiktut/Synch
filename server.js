@@ -127,11 +127,38 @@ io.on('connection', (socket) => {
 
     // Media synchronization
     socket.on('mediaLoaded', (data) => {
-        const { roomId, mediaType, duration } = data;
+        const { roomId, mediaType, duration, url, title, artist } = data;
         const room = rooms.get(roomId);
         if (room) {
-            room.media = { type: mediaType, duration };
-            socket.to(roomId).emit('mediaLoaded', data);
+            room.media = { 
+                type: mediaType, 
+                duration,
+                url: url || null,
+                title: title || null,
+                artist: artist || null
+            };
+            
+            // Broadcast to all other users in the room
+            socket.to(roomId).emit('mediaLoaded', {
+                mediaType,
+                duration,
+                url,
+                title,
+                artist
+            });
+            
+            const mediaDescription = {
+                'youtube': 'YouTube video',
+                'vk': 'VK Video',
+                'rutube': 'RuTube video',
+                'video': 'video file',
+                'audio': 'audio file'
+            };
+            
+            const typeDesc = mediaDescription[mediaType] || mediaType;
+            const titleInfo = title && artist ? ` - ${title} by ${artist}` : title ? ` - ${title}` : '';
+            
+            console.log(`New media loaded in room ${roomId}: ${typeDesc}${titleInfo}`);
         }
     });
 
@@ -179,17 +206,44 @@ io.on('connection', (socket) => {
     // Voice chat WebRTC signaling
     socket.on('voiceOffer', (data) => {
         const { roomId, offer } = data;
+        console.log(`Voice offer from ${socket.id} in room ${roomId}`);
         socket.to(roomId).emit('voiceOffer', { offer, from: socket.id });
     });
 
     socket.on('voiceAnswer', (data) => {
         const { roomId, answer } = data;
+        console.log(`Voice answer from ${socket.id} in room ${roomId}`);
         socket.to(roomId).emit('voiceAnswer', { answer, from: socket.id });
     });
 
     socket.on('voiceIceCandidate', (data) => {
         const { roomId, candidate } = data;
         socket.to(roomId).emit('voiceIceCandidate', { candidate, from: socket.id });
+    });
+
+    // Voice chat status events
+    socket.on('voiceReady', (data) => {
+        const { roomId } = data;
+        const user = users.get(socket.id);
+        if (user && user.room === roomId) {
+            console.log(`${user.username} voice ready in room ${roomId}`);
+            socket.to(roomId).emit('userVoiceReady', { 
+                username: user.username,
+                userId: socket.id 
+            });
+        }
+    });
+
+    socket.on('voiceDisconnected', (data) => {
+        const { roomId } = data;
+        const user = users.get(socket.id);
+        if (user && user.room === roomId) {
+            console.log(`${user.username} voice disconnected in room ${roomId}`);
+            socket.to(roomId).emit('userVoiceDisconnected', { 
+                username: user.username,
+                userId: socket.id 
+            });
+        }
     });
 
     // Handle disconnection

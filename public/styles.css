@@ -6,9 +6,39 @@
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #333;
+    background: linear-gradient(135deg, #2c3e50, #4ca1af);
+    color: #f4f4f4;
     min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container {
+    max-width: 1000px;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #ecf0f1;
+}
+
+header h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+header p {
+    font-size: 1.2rem;
+    color: #ecf0f1;
+    margin-top: 10px;
 }
 
 .container {
@@ -42,12 +72,24 @@ header p {
 }
 
 .auth-form {
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     padding: 40px;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
     text-align: center;
-    min-width: 300px;
+    width: 100%;
+    max-width: 400px;
+}
+
+.auth-form input {
+    margin-bottom: 15px;
+    border: none;
+    font-size: 16px;
+}
+
+.auth-form button {
+    background: linear-gradient(135deg, #1abc9c, #16a085);
+    transition: background 0.3s;
 }
 
 .auth-form input {
@@ -82,10 +124,13 @@ header p {
 }
 
 .main-app {
-    display: grid;
-    grid-template-columns: 1fr 300px;
+    display: flex;
+    flex-direction: column;
     gap: 20px;
+    width: 100%;
     margin-top: 20px;
+    align-items: center;
+    justify-content: center;
 }
 
 .room-controls {
@@ -147,12 +192,22 @@ header p {
     background: #c82333;
 }
 
-.media-section {
-    background: white;
-    padding: 20px;
-    border-radius: 10px;
+.media-section, .chat-section, .voice-chat {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    padding: 25px;
+    border-radius: 15px;
+    width: 100%;
+    max-width: 800px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     margin-bottom: 20px;
+}
+
+.media-controls, .voice-controls, .room-controls, .chat-input {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 .media-controls {
@@ -300,14 +355,7 @@ header p {
     border: 1px solid #c3e6cb;
 }
 
-.chat-section {
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    display: flex;
-    flex-direction: column;
-    height: 400px;
-}
+/* Remove redundant chat-section styles */
 
 .chat-messages {
     flex: 1;
@@ -386,13 +434,17 @@ header p {
     position: fixed;
     top: 20px;
     right: 20px;
-    padding: 15px 20px;
-    background: #28a745;
+    padding: 10px 20px;
+    background: #3498db;
     color: white;
-    border-radius: 5px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    border-radius: 3px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     z-index: 1000;
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
     animation: slideIn 0.3s ease;
+    border-left: 5px solid #2980b9;
 }
 
 .notification.error {
@@ -400,8 +452,124 @@ header p {
 }
 
 .notification.warning {
-    background: #ffc107;
-    color: #212529;
+    background-color: #ff9800;
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #2c2c2c;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    color: white;
+    position: relative;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    color: #6c5ce7;
+}
+
+.modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #333;
+    color: white;
+    box-sizing: border-box;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    margin-top: 15px;
+}
+
+.modal-buttons button {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.close {
+    position: absolute;
+    right: 15px;
+    top: 10px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: white;
+}
+
+/* Search Results */
+#searchResults {
+    max-height: 300px;
+    overflow-y: auto;
+    margin-top: 15px;
+}
+
+.search-result {
+    background-color: #333;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    border: 1px solid #444;
+    transition: background-color 0.3s;
+}
+
+.search-result:hover {
+    background-color: #444;
+}
+
+.search-result h4 {
+    margin: 0 0 5px 0;
+    color: #6c5ce7;
+}
+
+.search-result p {
+    margin: 0;
+    color: #ccc;
+    font-size: 14px;
+}
+
+.search-result .duration {
+    color: #888;
+    font-size: 12px;
+}
+
+/* URL, Music, and Movie Search Buttons */
+#urlBtn, #musicSearchBtn, #movieSearchBtn {
+    background: linear-gradient(135deg, #8e44ad, #9b59b6);
+    color: white;
+    transition: background 0.2s;
+}
+
+#urlBtn:hover, #musicSearchBtn:hover, #movieSearchBtn:hover {
+    background: linear-gradient(135deg, #732d91, #8e44ad);
 }
 
 @keyframes slideIn {

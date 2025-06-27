@@ -4,13 +4,35 @@ A real-time web application for synchronous music listening and movie watching w
 
 ## Features
 
-- **🎵 Music Sync**: Listen to music together in real-time
-- **🎬 Movie Sync**: Watch videos simultaneously with friends
-- **🗣️ Voice Chat**: Built-in WebRTC voice communication
-- **💬 Text Chat**: Real-time messaging within rooms
-- **🏠 Room System**: Create or join private rooms
-- **📱 Responsive Design**: Works on desktop and mobile devices
-- **⚡ Real-time Sync**: Automatic synchronization of play/pause/seek
+### 🎵 **Enhanced Media Support**
+- **Local File Upload**: Support for audio (MP3, WAV, etc.) and video (MP4, WebM, etc.) files
+- **🆕 URL Media Loading**: Load videos and audio directly from any URL
+- **🆕 YouTube Integration**: Watch YouTube videos together with embedded player
+- **🆕 Music Search**: Search and play music tracks from online sources (Jamendo API)
+- **Real-time Sync**: Automatic synchronization of play/pause/seek across all users
+
+### 🗣️ **Improved Voice Chat**
+- **🆕 Fixed Microphone Issues**: Microphone now works on first press (no double-click needed!)
+- **Enhanced WebRTC**: Better connection handling and audio quality
+- **Connection Status**: Real-time feedback on voice chat connections
+- **Auto Audio Settings**: Echo cancellation, noise suppression, auto gain control
+
+### 🏠 **Room Management**
+- **Create/Join Rooms**: Easy room creation with custom or auto-generated IDs
+- **User Presence**: See who's online in your room
+- **Host Controls**: Room creators get additional control privileges
+- **Seamless Switching**: Leave and join different rooms easily
+
+### 💬 **Communication**
+- **Live Text Chat**: Real-time messaging within rooms
+- **System Messages**: Notifications for user joins/leaves
+- **Message History**: Persistent chat during session
+
+### 📱 **User Experience**
+- **Responsive Design**: Works perfectly on desktop and mobile devices
+- **🆕 Modal Interfaces**: Clean popups for URL input and music search
+- **Error Handling**: Comprehensive error messages and user guidance
+- **Notifications**: Real-time feedback for all actions
 
 ## Technology Stack
 
@@ -71,10 +93,31 @@ A real-time web application for synchronous music listening and movie watching w
 
 ### Media Controls
 
+#### 📁 **File Upload**
 - **Upload**: Support for audio (MP3, WAV, etc.) and video (MP4, WebM, etc.) files
 - **Play/Pause**: Synchronized across all room members
 - **Sync Button**: Manually sync your playback with the room
 - **Progress Bar**: Visual indicator of playback progress
+
+#### 🔗 **URL Media Loading (NEW)**
+- **Add URL Button**: Click "🔗 Add URL" to load media from any direct link
+- **Supported Formats**: Direct video/audio links (MP4, MP3, WebM, etc.)
+- **YouTube Videos**: Paste any YouTube URL to watch together
+- **Auto-Detection**: Automatically determines if URL is video or audio
+- **Error Handling**: Fallback options if URL fails to load
+
+#### 🎵 **Music Search (NEW)**
+- **Search Music Button**: Click "🎵 Search Music" to find tracks
+- **Free Music Database**: Search through Jamendo's free music library
+- **Track Information**: See song title, artist, and duration
+- **One-Click Play**: Click any search result to load and play
+- **YouTube Fallback**: If no results found, option to search YouTube
+
+#### 📺 **YouTube Integration (NEW)**
+- **Full YouTube Support**: Embedded YouTube player with all controls
+- **URL Formats**: Supports youtube.com and youtu.be links
+- **Shared Viewing**: All users see the same video simultaneously
+- **Native Controls**: Use YouTube's built-in player controls
 
 ### Voice Chat
 
