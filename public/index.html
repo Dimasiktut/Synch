@@ -34,12 +34,50 @@
             </div>
 
             <div class="media-section" id="mediaSection" style="display: none;">
-                <div class="media-controls">
-                    <button id="uploadBtn">Upload Media</button>
-                    <input type="file" id="fileInput" accept="audio/*,video/*" style="display: none;">
-                    <button id="playPauseBtn" disabled>Play</button>
-                    <button id="syncBtn" disabled>Sync</button>
+            <div class="media-controls">
+                <button id="uploadBtn">📁 Upload Media</button>
+                <input type="file" id="fileInput" accept="video/*,audio/*" style="display: none;">
+                <button id="urlBtn">🔗 Add URL</button>
+                <button id="musicSearchBtn">🎵 Search Music</button>
+                <button id="movieSearchBtn">🎬 Search Movies</button>
+                <button id="playPauseBtn" disabled>Play</button>
+                <button id="syncBtn" disabled>🔄 Sync</button>
+            </div>
+            
+            <!-- URL Input Modal -->
+            <div id="urlModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Add Media URL</h3>
+                    <input type="url" id="mediaUrlInput" placeholder="Enter video/audio URL (YouTube, direct links, etc.)">
+                    <div class="modal-buttons">
+                        <button id="loadUrlBtn">Load Media</button>
+                        <button id="cancelUrlBtn">Cancel</button>
+                    </div>
                 </div>
+            </div>
+            
+            <!-- Music Search Modal -->
+            <div id="musicModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Search Music</h3>
+                    <input type="text" id="musicSearchInput" placeholder="Search for songs, artists, albums...">
+                    <button id="searchBtn">🔍 Search</button>
+                    <div id="searchResults"></div>
+                </div>
+            </div>
+            
+            <!-- Movie Search Modal -->
+            <div id="movieModal" class="modal" style="display: none;">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3>Search Movies & TV Shows</h3>
+                    <input type="text" id="movieSearchInput" placeholder="Search for movies, TV shows...">
+                    <button id="movieSearchSubmitBtn">🔍 Search</button>
+                    <div id="movieResults"></div>
+                </div>
+            </div>
 
                 <div class="media-player">
                     <video id="mediaPlayer" controls style="display: none; width: 100%; max-width: 800px;"></video>
