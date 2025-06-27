@@ -3,120 +3,305 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sync Watch - Music & Movies Together</title>
+    <title>🎵 Sync Watch - Premium Experience</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta name="theme-color" content="#667eea">
+    <meta name="description" content="Experience premium synchronized media streaming with friends - Watch movies and listen to music together in real-time">
 </head>
 <body>
     <div class="container">
         <header>
             <h1>🎵 Sync Watch 🎬</h1>
-            <p>Listen to music and watch movies together in real-time</p>
+            <p>Experience premium synchronized entertainment with friends worldwide</p>
         </header>
 
+        <!-- Authentication Section -->
         <div class="auth-section" id="authSection">
-            <div class="auth-form">
-                <input type="text" id="usernameInput" placeholder="Enter your username" maxlength="20">
-                <button id="joinBtn">Join</button>
+            <div class="auth-form glass-card">
+                <div class="auth-header">
+                    <h2 style="margin-bottom: 1rem; font-weight: 600; color: var(--text-primary);">Welcome Back</h2>
+                    <p style="color: var(--text-secondary); margin-bottom: 2rem;">Enter your username to join the premium experience</p>
+                </div>
+                <input type="text" id="usernameInput" placeholder="Enter your username" maxlength="20" autocomplete="username">
+                <button id="joinBtn" class="btn btn-primary">
+                    <span>Join Experience</span>
+                </button>
             </div>
         </div>
 
+        <!-- Main Application -->
         <div class="main-app" id="mainApp" style="display: none;">
-            <div class="room-controls">
-                <input type="text" id="roomIdInput" placeholder="Room ID (optional)">
-                <button id="createRoomBtn">Create Room</button>
-                <button id="joinRoomBtn">Join Room</button>
+            
+            <!-- Room Controls -->
+            <div class="room-controls glass-card">
+                <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+                    <label for="roomIdInput" style="color: var(--text-secondary); font-size: 0.875rem; font-weight: 500;">Room ID (Optional)</label>
+                    <input type="text" id="roomIdInput" placeholder="Enter custom room ID or leave blank for auto-generation">
+                </div>
+                <button id="createRoomBtn" class="btn btn-primary">
+                    <span>✨ Create Room</span>
+                </button>
+                <button id="joinRoomBtn" class="btn btn-accent">
+                    <span>🚀 Join Room</span>
+                </button>
             </div>
 
-            <div class="room-info" id="roomInfo" style="display: none;">
-                <h3>Room: <span id="currentRoomId"></span></h3>
-                <p>Users online: <span id="userCount">0</span></p>
-                <button id="leaveRoomBtn">Leave Room</button>
+            <!-- Room Information -->
+            <div class="room-info glass-card" id="roomInfo" style="display: none;">
+                <div class="room-details">
+                    <h3>🏠 Room: <span id="currentRoomId" style="font-family: 'Monaco', monospace; color: var(--accent-gradient);"></span></h3>
+                    <p>👥 Users online: <span id="userCount" style="font-weight: 600; color: var(--success);">0</span></p>
+                    <p style="font-size: 0.875rem; color: var(--text-muted); margin-top: 0.5rem;">Share your room ID with friends to watch together</p>
+                </div>
+                <button id="leaveRoomBtn" class="btn btn-error">
+                    <span>🚪 Leave Room</span>
+                </button>
             </div>
 
-            <div class="media-section" id="mediaSection" style="display: none;">
-            <div class="media-controls">
-                <button id="uploadBtn">📁 Upload Media</button>
-                <input type="file" id="fileInput" accept="video/*,audio/*" style="display: none;">
-                <button id="urlBtn">🔗 Add URL</button>
-                <button id="musicSearchBtn">🎵 Search Music</button>
-                <button id="movieSearchBtn">🎬 Search Movies</button>
-                <button id="playPauseBtn" disabled>Play</button>
-                <button id="syncBtn" disabled>🔄 Sync</button>
-            </div>
-            
-            <!-- URL Input Modal -->
-            <div id="urlModal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>Add Media URL</h3>
-                    <input type="url" id="mediaUrlInput" placeholder="Enter video/audio URL (YouTube, direct links, etc.)">
-                    <div class="modal-buttons">
-                        <button id="loadUrlBtn">Load Media</button>
-                        <button id="cancelUrlBtn">Cancel</button>
-                    </div>
+            <!-- Media Section -->
+            <div class="media-section glass-card" id="mediaSection" style="display: none;">
+                <div class="section-header" style="margin-bottom: 2rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.5rem; font-weight: 600; margin-bottom: 0.5rem;">🎬 Media Controls</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Upload, search, or stream content together</p>
                 </div>
-            </div>
-            
-            <!-- Music Search Modal -->
-            <div id="musicModal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>Search Music</h3>
-                    <input type="text" id="musicSearchInput" placeholder="Search for songs, artists, albums...">
-                    <button id="searchBtn">🔍 Search</button>
-                    <div id="searchResults"></div>
-                </div>
-            </div>
-            
-            <!-- Movie Search Modal -->
-            <div id="movieModal" class="modal" style="display: none;">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <h3>Search Movies & TV Shows</h3>
-                    <input type="text" id="movieSearchInput" placeholder="Search for movies, TV shows...">
-                    <button id="movieSearchSubmitBtn">🔍 Search</button>
-                    <div id="movieResults"></div>
-                </div>
-            </div>
 
+                <div class="media-controls">
+                    <button id="uploadBtn" class="btn btn-secondary">
+                        <span>📁 Upload Media</span>
+                    </button>
+                    <input type="file" id="fileInput" accept="video/*,audio/*" style="display: none;">
+                    
+                    <button id="urlBtn" class="btn btn-accent">
+                        <span>🔗 Add URL</span>
+                    </button>
+                    
+                    <button id="musicSearchBtn" class="btn btn-primary">
+                        <span>🎵 Search Music</span>
+                    </button>
+                    
+                    <button id="movieSearchBtn" class="btn btn-secondary">
+                        <span>🎬 Search Movies</span>
+                    </button>
+                    
+                    <button id="playPauseBtn" class="btn btn-success" disabled>
+                        <span>▶️ Play</span>
+                    </button>
+                    
+                    <button id="syncBtn" class="btn btn-warning" disabled>
+                        <span>🔄 Sync</span>
+                    </button>
+                </div>
+                
+                <!-- Media Player -->
                 <div class="media-player">
-                    <video id="mediaPlayer" controls style="display: none; width: 100%; max-width: 800px;"></video>
-                    <audio id="audioPlayer" controls style="display: none; width: 100%;"></audio>
+                    <video id="mediaPlayer" controls style="display: none; width: 100%; max-width: 800px; border-radius: 16px; box-shadow: var(--shadow-secondary);"></video>
+                    <audio id="audioPlayer" controls style="display: none; width: 100%; border-radius: 12px;"></audio>
                 </div>
 
+                <!-- Playback Information -->
                 <div class="playback-info">
-                    <div class="progress-bar">
-                        <div class="progress" id="progressBar"></div>
-                    </div>
-                    <div class="time-info">
-                        <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                    <div class="progress-container" style="margin-bottom: 1rem;">
+                        <div class="progress-bar">
+                            <div class="progress" id="progressBar"></div>
+                        </div>
+                        <div class="time-info">
+                            <span id="currentTime">00:00</span> / <span id="duration">00:00</span>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="voice-chat" id="voiceChat" style="display: none;">
-                <div class="voice-controls">
-                    <button id="micToggle">🎤 Mic Off</button>
-                    <button id="speakerToggle">🔊 Speaker On</button>
+            <!-- Voice Chat -->
+            <div class="voice-chat glass-card" id="voiceChat" style="display: none;">
+                <div class="section-header" style="margin-bottom: 1.5rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">🎤 Voice Chat</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Talk with your friends while watching</p>
                 </div>
+
+                <div class="voice-controls">
+                    <button id="micToggle" class="btn btn-error">
+                        <span>🎤 Mic Off</span>
+                    </button>
+                    <button id="speakerToggle" class="btn btn-success">
+                        <span>🔊 Speaker On</span>
+                    </button>
+                </div>
+                
                 <div class="voice-users" id="voiceUsers">
                     <!-- Voice chat participants will be listed here -->
                 </div>
             </div>
 
-            <div class="chat-section">
-                <div class="chat-messages" id="chatMessages">
-                    <!-- Chat messages will appear here -->
+            <!-- Chat Section -->
+            <div class="chat-section glass-card">
+                <div class="section-header" style="margin-bottom: 1.5rem;">
+                    <h3 style="color: var(--text-primary); font-size: 1.25rem; font-weight: 600; margin-bottom: 0.5rem;">💬 Live Chat</h3>
+                    <p style="color: var(--text-secondary); font-size: 0.9rem;">Chat with everyone in the room</p>
                 </div>
+
+                <div class="chat-messages" id="chatMessages">
+                    <div class="welcome-message" style="text-align: center; color: var(--text-muted); font-style: italic; padding: 2rem;">
+                        <p>Welcome to the chat! Start a conversation with your friends.</p>
+                    </div>
+                </div>
+                
                 <div class="chat-input">
-                    <input type="text" id="messageInput" placeholder="Type a message..." maxlength="200">
-                    <button id="sendBtn">Send</button>
+                    <input type="text" id="messageInput" placeholder="Type your message..." maxlength="200" autocomplete="off">
+                    <button id="sendBtn" class="btn btn-primary">
+                        <span>Send</span>
+                    </button>
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- URL Input Modal -->
+    <div id="urlModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>🔗 Add Media URL</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Paste a YouTube link, direct media URL, or streaming link</p>
+            <input type="url" id="mediaUrlInput" placeholder="https://youtube.com/watch?v=... or direct media URL">
+            <div class="modal-buttons">
+                <button id="loadUrlBtn" class="btn btn-primary">
+                    <span>Load Media</span>
+                </button>
+                <button id="cancelUrlBtn" class="btn" style="background: rgba(255, 255, 255, 0.1); color: var(--text-primary);">
+                    <span>Cancel</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Music Search Modal -->
+    <div id="musicModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>🎵 Search Music</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Find songs, artists, albums, and playlists</p>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <input type="text" id="musicSearchInput" placeholder="Search for songs, artists, albums..." style="flex: 1;">
+                <button id="searchBtn" class="btn btn-accent">
+                    <span>🔍 Search</span>
+                </button>
+            </div>
+            <div id="searchResults" class="search-results">
+                <div class="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                    <p>🎶 Enter a search term to find music</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Movie Search Modal -->
+    <div id="movieModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>🎬 Search Movies & TV Shows</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Discover movies, series, documentaries, and more</p>
+            <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+                <input type="text" id="movieSearchInput" placeholder="Search for movies, TV shows, documentaries..." style="flex: 1;">
+                <button id="movieSearchSubmitBtn" class="btn btn-secondary">
+                    <span>🔍 Search</span>
+                </button>
+            </div>
+            <div id="movieResults" class="search-results">
+                <div class="search-placeholder" style="text-align: center; color: var(--text-muted); padding: 2rem;">
+                    <p>🎭 Enter a search term to find movies and shows</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(10px); z-index: 9999; justify-content: center; align-items: center;">
+        <div style="text-align: center; color: var(--text-primary);">
+            <div class="loading" style="margin: 0 auto 1rem auto; width: 40px; height: 40px; border-width: 4px;"></div>
+            <p style="font-size: 1.1rem; font-weight: 500;">Loading premium experience...</p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="/socket.io/socket.io.js"></script>
+    <script>
+        // Enhanced loading experience
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add loading animation to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function() {
+                    if (!this.disabled) {
+                        this.style.transform = 'translateY(0) scale(0.98)';
+                        setTimeout(() => {
+                            this.style.transform = '';
+                        }, 150);
+                    }
+                });
+            });
+
+            // Enhanced input focus effects
+            const inputs = document.querySelectorAll('input[type="text"], input[type="url"]');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement?.classList?.add('focused');
+                });
+                input.addEventListener('blur', function() {
+                    this.parentElement?.classList?.remove('focused');
+                });
+            });
+
+            // Add ripple effect to cards
+            const cards = document.querySelectorAll('.glass-card');
+            cards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    const ripple = document.createElement('div');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size / 2;
+                    const y = e.clientY - rect.top - size / 2;
+                    
+                    ripple.style.cssText = `
+                        position: absolute;
+                        width: ${size}px;
+                        height: ${size}px;
+                        left: ${x}px;
+                        top: ${y}px;
+                        background: rgba(255, 255, 255, 0.1);
+                        border-radius: 50%;
+                        pointer-events: none;
+                        transform: scale(0);
+                        animation: ripple 0.6s ease-out;
+                    `;
+                    
+                    this.style.position = 'relative';
+                    this.style.overflow = 'hidden';
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // Add ripple animation keyframes
+            const style = document.createElement('style');
+            style.textContent = `
+                @keyframes ripple {
+                    from {
+                        transform: scale(0);
+                        opacity: 1;
+                    }
+                    to {
+                        transform: scale(2);
+                        opacity: 0;
+                    }
+                }
+            `;
+            document.head.appendChild(style);
+        });
+    </script>
     <script src="script.js"></script>
 </body>
 </html>
